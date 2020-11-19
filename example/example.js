@@ -1,4 +1,4 @@
-SDK = require("../sdk")
+SDK = require("safecustody_sdk")
 var config = {
     "userid": "26",
     "appid": "",
