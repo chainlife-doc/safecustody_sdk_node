@@ -1,13 +1,13 @@
 # 赛福托管钱包API Node-SDK  
 
 ### 安装SDK
-
+``` npm i safecustody_sdk ```
     
 # 例子
 
 #### 创建sdkApi
  ```js
-SDK = require("../sdk")
+SDK = require("safecustody_sdk")
 var config = {
     "userid": "26",
     "appid": "",
