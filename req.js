@@ -26,6 +26,7 @@ Request.reqParam = function reqParam(param, user) {
         "auth": {
             "token": user.getToken(),
             "timestamp": user.getTime(),
+            "api_key": user.getApiKey(),
         },
     }
     if (param !== undefined && param != null && param !== "") {
@@ -50,7 +51,7 @@ Request.post = async function post(url, content) {
             },
             url: url,
             data: JSON.stringify(content),
-        }).then((res)=>{
+        }).then((res) => {
             resolve(res.data)
         })
     })

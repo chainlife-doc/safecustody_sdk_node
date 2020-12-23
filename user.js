@@ -13,13 +13,18 @@ class User {
     /**
      * @var string
      */
-    salt;
+    secretKey;
 
     /**
      * @var number
      */
     times;
 
+
+    /**
+     * @var string
+     */
+    apiKey;
 
     /**
      * 设置用户
@@ -43,10 +48,18 @@ class User {
      * 设置salt
      * @param salt
      */
-    setSalt(salt) {
-        this.salt = salt
+    setSecretKey(salt) {
+        this.secretKey = salt
     };
 
+
+    getApiKey() {
+        return this.apiKey;
+    }
+
+    setApiKey(value) {
+        this.apiKey = value;
+    }
 
     /**
      * 获取用户当前时间
@@ -57,7 +70,7 @@ class User {
         if (this.times === undefined || this.times === "" || this.times == null) {
             this.times = Date.now();
         }
-        return parseInt(this.times/1000)
+        return parseInt(this.times / 1000)
     };
 
 
@@ -70,12 +83,12 @@ class User {
 
 
     getToken() {
-        return this.Md5(this.appid + "_" + this.salt + "_" + this.userId + "_" + this.getTime())
+        return this.Md5(this.apiKey + "_" + this.secretKey + "_" + this.userId + "_" + this.getTime())
     }
 
 
     getSign(addr, memo = "", usertags = "") {
-        return this.Md5(this.appid + "_" + this.salt + "_" + this.userId + "_" + this.getTime() + "_" + addr + "_" + memo + "_" + usertags)
+        return this.Md5(this.apiKey + "_" + this.secretKey + "_" + this.userId + "_" + this.getTime() + "_" + addr + "_" + memo + "_" + usertags)
     }
 
 

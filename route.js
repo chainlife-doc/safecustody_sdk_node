@@ -114,6 +114,16 @@ class Route {
         }
         return Request.request(this.host + "withdraw/history.php", p, this.user)
     }
+
+    WithdrawCancel(subuserId, chain, coin,withdrawid){
+        let p = {
+            "subuserid": subuserId,
+            "chain": chain,
+            "coin": coin,
+            "withdrawid": withdrawid,
+        }
+        return Request.request(this.host + "withdraw/cancel.php", p, this.user)
+    }
 }
 
 module.exports = Route

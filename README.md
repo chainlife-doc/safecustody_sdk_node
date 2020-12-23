@@ -9,10 +9,11 @@
  ```js
 SDK = require("safecustody_sdk")
 var config = {
-    "userid": "26",
-    "appid": "",
-    "salt": "",
-    "host": "",
+    "userid": "26",//对应商户后台的商户id
+    "appid": "",//对应商户后台的APPID
+    "secretKey": "",//对应商户后台的SECRETKEY
+    "apiKey":"",//对应商户后台的APIKEY
+    "host": "",//TODO 请向微信群的官方人员获取
 }
 
 sdk = new SDK()
@@ -27,7 +28,7 @@ sdk.QueryCoinConf("btc").then(function (data) {
 })
 ```
 
-#### [查询公共币种信息](https://github.com/chainlife-doc/wallet-api/blob/master/%E6%9F%A5%E8%AF%A2%E5%B8%81%E7%A7%8D%E4%BF%A1%E6%81%AF.md)
+#### [查询全部币种信息](https://github.com/chainlife-doc/wallet-api/blob/master/%E6%9F%A5%E8%AF%A2%E5%B8%81%E7%A7%8D%E4%BF%A1%E6%81%AF.md)
 ```js
 sdk.QueryCoins().then(function (data) {
     console.log(data.data)
@@ -53,8 +54,8 @@ sdk.GetDepositAddr([{"chain": "trx", "coin": "trx", "subuserid": "1"}]).then(fun
 
 #### [获取充值记录](https://github.com/chainlife-doc/wallet-api/blob/master/deposit/%E8%8E%B7%E5%8F%96%E5%85%85%E5%80%BC%E8%AE%B0%E5%BD%95.md)
 ```js
-// string coin 币名                                        
-// string chain 链名                                       
+// string coin 币名 (空字符串默认不做筛选)                                        
+// string chain 主链 (空字符串默认不做筛选)                                        
 // string subuserid 你的用户id                               
 // int fromid 从哪个充值序号开始，值大于等于1,查询结果包含fromId对应的充值记录       
 // int limit 最多查询多少条记录，包含fromid这条记录                      
@@ -80,9 +81,10 @@ sdk.QueryIsInternalAddr(coin = "trx", chain = "trx", addr = "").then(function (d
 // subuserid 你的用户id             
 // addr 提币地址                      
 // amount 提币数量                    
-// memo 提币备注,内容自定义（会记录到区块链上）      
-// usertags 提币标签，内容自定义 （不会记录到区块链上）
-sdk.SubmitWithdraw(subuserid = "1", chain = "trx", coin = "trx", addr = "", amount = "1", memo = "中国", usertags = "深圳").then(function (data) {
+// memo 该字段主要提供给链上支持备注的币种，内容会更新到链上     
+// usertags 用户标签, 自定义内容，一般作为订单备注使用,辅助说明
+// user_orderid 用户自定义订单ID，该字段主要是填写用户系统的订单流水号，字段具有唯一性（可选字段)
+sdk.SubmitWithdraw(subuserid = "1", chain = "trx", coin = "trx", addr = "", amount = "1", memo = "中国", usertags = "深圳",user_orderid="1").then(function (data) {
     console.log(data.data)
 })
 ```
@@ -94,9 +96,10 @@ sdk.SubmitWithdraw(subuserid = "1", chain = "trx", coin = "trx", addr = "", amou
 // string subuserid 你的用户id              
 // string addr 提币地址                       
 // string amount 提币数量                     
-// string memo 提币备注,内容自定义（会记录到区块链上）       
-// string usertags 提币标签，内容自定义 （不会记录到区块链上） 
-sdk.ValidateWithdraw(subuserid = "1", chain = "trx", coin = "trx", addr = "", amount = "1", memo = "中国", usertags = "深圳").then(function (data) {
+// string memo 该字段主要提供给链上支持备注的币种，内容会更新到链上           
+// string usertags 用户标签, 自定义内容，一般作为订单备注使用,辅助说明 
+// user_orderid  用户自定义订单ID，该字段主要是填写用户系统的订单流水号，字段具有唯一性（可选字段)
+sdk.ValidateWithdraw(subuserid = "1", chain = "trx", coin = "trx", addr = "", amount = "1", memo = "中国", usertags = "深圳",user_orderid="1").then(function (data) {
     console.log(data.data)
 })
 ```
@@ -119,6 +122,17 @@ sdk.QueryWithdrawStatus(coin = "trx", chain = "trx", withdrawid = "").then(funct
 // int fromid 从哪个充值序号开始，值大于等于1,查询结果包含fromId对应的充值记录          
 // int limit 最多查询多少条记录，包含fromid这条记录                         
 sdk.QueryWithdrawHistory(subuserId = "1", chain = "trx", coin = "trx", fromId = 0, limit = 100).then(function (data) {
+    console.log(data.data)
+})
+```
+
+#### [取消提币接口](https://github.com/chainlife-doc/wallet-api/blob/master/withdraw/%E5%8F%96%E6%B6%88%E6%8F%90%E5%B8%81%E6%8E%A5%E5%8F%A3.md)
+```js
+// string coin 币名                                           
+// string chain 链名                                          
+// string subuserid 你的用户id  
+// string withdrawid 提币订单ID
+sdk.WithdrawCancel(subuserId = "1", chain = "trx", coin = "trx", withdrawid = "").then(function (data) {
     console.log(data.data)
 })
 ```

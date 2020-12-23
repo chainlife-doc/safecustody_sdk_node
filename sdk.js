@@ -1,7 +1,7 @@
 Route = require("./route")
 class Sdk extends Route {
 
-    config = ["userid", "appid", "salt", "host"]
+    config = ["userid", "appid", "secretKey", "host","apiKey"]
 
     setConfig(config) {
         var key
@@ -12,7 +12,8 @@ class Sdk extends Route {
         }
         this.user.setAppid(config["appid"])
         this.user.setUserId(config["userid"])
-        this.user.setSalt(config["salt"])
+        this.user.setSecretKey(config["secretKey"])
+        this.user.setApiKey(config["apiKey"])
         this.setHost(config["host"])
     }
 }
