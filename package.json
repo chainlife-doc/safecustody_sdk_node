@@ -1,6 +1,6 @@
 {
   "name": "safecustody_sdk",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "safecustody wallet api node sdk",
   "main": "req.js",
   "directories": {
