@@ -11,7 +11,7 @@ class Route {
     }
 
     setHost(host) {
-        if (str.substr(host.length - 1, 1) !== "/") {
+        if (host.substr(host.length - 1, 1) !== "/") {
             host = host + "/";
         }
         this.host = host
