@@ -5,7 +5,7 @@
 //使用sdk,验证身份(token字段)不需要主动签名加密,内部已做处理
 //使用案例请认真阅读开发文档,因为有些字段是选填的,案例中并没有体现出来
 
-SDK = require("safecustody_sdk")
+SDK = require("sdk")
 var config = {
     "userid": "26",//对应商户后台的商户id
     "appid": "",//对应商户后台的APPID
