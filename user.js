@@ -87,8 +87,14 @@ class User {
     }
 
 
-    getSign(addr, memo = "", usertags = "") {
-        return this.Md5(this.apiKey + "_" + this.secretKey + "_" + this.userId + "_" + this.getTime() + "_" + addr + "_" + memo + "_" + usertags)
+    getSign(addr, memo = "", usertags = "", userOrderId = "") {
+
+        let str = "";
+        if (userOrderId !== "") {
+            str = "_" + userOrderId;
+        }
+
+        return this.Md5(this.apiKey + "_" + this.secretKey + "_" + this.userId + "_" + this.getTime() + "_" + addr + "_" + memo + "_" + usertags + str)
     }
 
 

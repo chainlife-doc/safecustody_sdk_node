@@ -64,7 +64,7 @@ class Route {
     }
 
     //提交提币工单
-    SubmitWithdraw(subuserid, chain, coin, addr, amount, memo = "", usertags = "") {
+    SubmitWithdraw(subuserid, chain, coin, addr, amount, memo = "", usertags = "", userOrderid = "") {
         let p = {
             "subuserid": subuserid,
             "chain": chain,
@@ -73,13 +73,14 @@ class Route {
             "amount": amount,
             "memo": memo,
             "usertags": usertags,
-            "sign": this.user.getSign(addr, memo, usertags),
+            "user_orderid": userOrderid,
+            "sign": this.user.getSign(addr, memo, usertags, userOrderid),
         }
         return Request.request(this.host + "withdraw/submit.php", p, this.user)
     }
 
     //提币预校验接口
-    ValidateWithdraw(subuserid, chain, coin, addr, amount, memo = "", usertags = "") {
+    ValidateWithdraw(subuserid, chain, coin, addr, amount, memo = "", usertags = "", userOrderid = "") {
         let p = {
             "subuserid": subuserid,
             "chain": chain,
@@ -88,7 +89,8 @@ class Route {
             "amount": amount,
             "memo": memo,
             "usertags": usertags,
-            "sign": this.user.getSign(addr, memo, usertags),
+            "user_orderid": userOrderid,
+            "sign": this.user.getSign(addr, memo, usertags, userOrderid),
         }
         return Request.request(this.host + "withdraw/validator.php", p, this.user)
     }
@@ -115,7 +117,7 @@ class Route {
         return Request.request(this.host + "withdraw/history.php", p, this.user)
     }
 
-    WithdrawCancel(subuserId, chain, coin,withdrawid){
+    WithdrawCancel(subuserId, chain, coin, withdrawid) {
         let p = {
             "subuserid": subuserId,
             "chain": chain,
