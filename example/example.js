@@ -71,3 +71,8 @@ sdk.QueryWithdrawHistory(subuserId = "1", chain = "trx", coin = "trx", fromId = 
 sdk.WithdrawCancel(subuserId = "1", chain = "trx", coin = "trx", withdrawid = "").then(function (data) {
     console.log(data.data)
 })
+
+//查询节点高度
+sdk.BlockHeight(chain = "trx", coin = "trx").then(function (data) {
+    console.log(data.data)
+})

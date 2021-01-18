@@ -136,3 +136,11 @@ sdk.WithdrawCancel(subuserId = "1", chain = "trx", coin = "trx", withdrawid = ""
     console.log(data.data)
 })
 ```
+#### [查询加点高度](https://github.com/chainlife-doc/wallet-api/blob/master/%E6%9F%A5%E8%AF%A2%E5%B8%81%E7%A7%8D%E8%8A%82%E7%82%B9%E9%AB%98%E5%BA%A6.md)
+```js
+// string coin 币名                                           
+// string chain 链名   
+sdk.BlockHeight(chain = "trx", coin = "trx").then(function (data) {
+    console.log(data.data)
+})
+```

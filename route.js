@@ -126,6 +126,14 @@ class Route {
         }
         return Request.request(this.host + "withdraw/cancel.php", p, this.user)
     }
+
+    BlockHeight(chain, coin){
+        let p = {
+            "chain": chain,
+            "coin": coin,
+        }
+        return Request.request(this.host + "blockheight.php", p, this.user)
+    }
 }
 
 module.exports = Route
